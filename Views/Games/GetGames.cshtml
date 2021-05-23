@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<table class="table table-bordered table-striped" >
+    <tr>
+        <th>
+            @Html.ActionLink("Title", "GetGames", new{ sortOrder = ViewBag.NameSortParm})
+        </th>
+        <th>Genre</th>
+        <th>
+            @Html.ActionLink("Release Year", "GetGames", new{sortOrder = ViewBag.DateSortParm})
+        </th>
+        <th>Price</th>
+        <th>
+            @Html.ActionLink("Review Rating", "GetGames", new{sortOrder = ViewBag.RankSortParm})
+         </th>
+        <th>Reviews</th>
+    </tr>
+
+    @{
+      if (Model!= null){
+          foreach (var Data in Model){
+                <tr>
+                    <td>@Data.Title</td>
+                    <td>@Data.Genre</td>
+                    <td>@Data.ReleaseYear</td>
+                    <td>@Data.Price</td>
+                    <td>@Data.Review</td>
+                    <td>@Data.TextReview</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Games", new {@id=@Data.gameID })">Update |</a>
+                        <a href="@Url.Action("Delete", "Games", new {@id=@Data.gameID })">Remove Game</a>
+                    </td>
+                </tr>
+          }
+     }
+    }
+</table>

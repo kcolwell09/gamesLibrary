@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Games";
+    string[] TableHeaders = new string[] { "ID", "Title", "Genre", "Release Date", "Price" };
+}
+
+
+   <div class="table">
+       <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach (var head in TableHeaders){
+                            <th>
+                                @head
+                            </th>  
+                        }
+                    }
+                
+                </tr>
+            </thead>
+            
+            <tbody>
+                @{
+                    if (Model != null){
+                        foreach (var Data in Model){
+                           <tr>
+                               <td>@Data.gameID</td>
+                               <td>@Data.Title</td>
+                               <td>@Data.Genre</td>
+                               <td>@Data.ReleaseYear</td>
+                               <td>@Data.Price</td>
+                               <td>
+                               <a asp-action="Update" asp-route-id="@Data.gameID">Update</a> |
+                               <a asp-action="Delete" asp-route-id="@Data.gameID">Delete</a>                              
+                               </td>
+                           </tr> 
+                        }
+                    }else{
+                      Console.WriteLine("-------------No Data---------------");  
+                    }
+                
+                }
+             
+            </tbody>
+        </table>
+
+    </div>

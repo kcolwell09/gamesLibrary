@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@using(Html.BeginForm()){
+    
+    <b>Search Option</b>@Html.RadioButton("Option", "Title")<text> Title: </text> 
+    @Html.RadioButton("Option", "Genre")<text> Genre: </text>
+    @Html.RadioButton("Option", "ReleaseYear")<text> Year Published: </text>
+    @Html.RadioButton("Option", "Price")<text> Price: </text>
+    @Html.TextBox("Search")
+    <input type="submit" value="Search" />
+    <br>
+    <br>
+   
+}
+
+
+<table class="table table-bordered table-striped" >
+    <tr>
+        <th>
+            @Html.ActionLink("Title", "Index", new{ sortOrder = ViewBag.NameSortParm})
+        </th>
+        <th>Genre</th>
+        <th>
+            @Html.ActionLink("Release Year", "Index", new{sortOrder = ViewBag.DateSortParm})
+        </th>
+        <th>Price</th>
+        <th>
+            @Html.ActionLink("Review Rating", "Index", new{sortOrder = ViewBag.RankSortParm})
+         </th>
+        <th>Reviews</th>
+    </tr>
+
+    @{
+      if (Model!= null){
+          foreach (var Data in Model){
+                <tr>
+                    <td>@Data.Title</td>
+                    <td>@Data.Genre</td>
+                    <td>@Data.ReleaseYear</td>
+                    <td>@Data.Price</td>
+                    <td>@Data.Review</td>
+                    <td>@Data.TextReview</td>
+                    <td>
+                        <a href="@Url.Action("CreateGame", "Games", new {@id=@Data.gameID })">Add Game</a>
+                    </td>
+                </tr>
+          }
+     }
+    }
+</table>
